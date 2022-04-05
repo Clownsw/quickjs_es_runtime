@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="the console feature enables the script to use various cansole.log variants see also: MDN the following methods are available"><meta name="keywords" content="rust, rustlang, rust-lang, console"><title>quickjs_runtime::features::console - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script>
+    <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a class="sidebar-logo" href="../../../quickjs_runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.png" alt="logo"></div>
+        </a><h2 class="location">Module console</h2><div class="sidebar-elems"><div class="block items"><ul><li><a href="#functions">Functions</a></li></ul></div><div id="sidebar-vars" data-name="console" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../quickjs_runtime/index.html"><img class="rust-logo" src="../../../rust-logo.png" alt="logo"></a><nav class="sub"><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><h1 class="fqn"><span class="in-band">Module <a href="../../index.html">quickjs_runtime</a>::<wbr><a href="../index.html">features</a>::<wbr><a class="mod" href="#">console</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../../src/quickjs_runtime/features/console.rs.html#1-354" title="goto source code">[src]</a></span></h1><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>the console feature enables the script to use various cansole.log variants
+see also: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console">MDN</a>
+the following methods are available</p>
+<ul>
+<li>console.log()</li>
+<li>console.info()</li>
+<li>console.error()</li>
+<li>console.warning()</li>
+<li>console.trace()</li>
+</ul>
+<p>The methods use rust’s log crate to output messages. e.g. console.info() uses the log::info!() macro
+so the console messages should appear in the log you initialized from rust</p>
+<p>All methods accept a single message string and optional substitution values</p>
+<p>e.g.</p>
+<div class="example-wrap"><pre class="language-javascript"><code>console.log(&#39;Oh dear %s totaly failed %i times because of a %.4f variance in the space time continuum&#39;, &#39;some guy&#39;, 12, 2.46)</code></pre></div>
+<p>will output ‘Oh dear some guy totaly failed 12 times because of a 2.4600 variance in the space time continuum’</p>
+<p>The string substitution you can use are</p>
+<ul>
+<li>%o or %O Outputs a JavaScript object (serialized)</li>
+<li>%d or %i Outputs an integer. Number formatting is supported, for example  console.log(“Foo %.2d”, 1.1) will output the number as two significant figures with a leading 0: Foo 01</li>
+<li>%s Outputs a string (will attempt to call .toString() on objects, use %o to output a serialized JSON string)</li>
+<li>%f Outputs a floating-point value. Formatting is supported, for example  console.log(“Foo %.2f”, 1.1) will output the number to 2 decimal places: Foo 1.10</li>
+</ul>
+<h2 id="example" class="section-header"><a href="#example">Example</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">quickjs_runtime::builder::QuickJsRuntimeBuilder</span>;
+<span class="kw">use</span> <span class="ident">hirofa_utils::js_utils::Script</span>;
+<span class="kw">use</span> <span class="ident">log::LevelFilter</span>;
+<span class="ident">simple_logging::log_to_file</span>(<span class="string">&quot;console_test.log&quot;</span>, <span class="ident">LevelFilter::max</span>())
+            .<span class="ident">ok</span>()
+            .<span class="ident">expect</span>(<span class="string">&quot;could not init logger&quot;</span>);
+<span class="kw">let</span> <span class="ident">rt</span> <span class="op">=</span> <span class="ident">QuickJsRuntimeBuilder::new</span>().<span class="ident">build</span>();
+<span class="ident">rt</span>.<span class="ident">eval_sync</span>(<span class="ident">Script::new</span>(
+<span class="string">&quot;console.es&quot;</span>,
+<span class="string">&quot;console.log(&#39;the %s %s %s jumped over %i fences with a accuracy of %.2f&#39;, &#39;quick&#39;, &#39;brown&#39;, &#39;fox&#39;, 32, 0.512);&quot;</span>
+));</code></pre></div>
+<p>which will result in a log entry like
+<code>[00:00:00.012] (7f44e7d24700) INFO   the quick brown fox jumped over 32 fences with a accuracy of 0.51</code></p>
+</div></details><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.init.html" title="quickjs_runtime::features::console::init fn">init</a></div><div class="item-right docblock-short"></div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="quickjs_runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0 (9d1b2106e 2022-02-23)" ></div>
+</body></html>

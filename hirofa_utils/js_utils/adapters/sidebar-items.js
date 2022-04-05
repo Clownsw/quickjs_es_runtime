@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["promises",""],["proxies","utils for implementing proxy classes which can be used to use rust structs from JS (define method/getters/setters/etc)"]],"trait":[["JsPromiseAdapter",""],["JsRealmAdapter",""],["JsRuntimeAdapter",""],["JsValueAdapter",""]]});

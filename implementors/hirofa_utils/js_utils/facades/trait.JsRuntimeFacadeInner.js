@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["quickjs_runtime"] = [{"text":"impl <a class=\"trait\" href=\"hirofa_utils/js_utils/facades/trait.JsRuntimeFacadeInner.html\" title=\"trait hirofa_utils::js_utils::facades::JsRuntimeFacadeInner\">JsRuntimeFacadeInner</a> for <a class=\"struct\" href=\"quickjs_runtime/facades/struct.QuickjsRuntimeFacadeInner.html\" title=\"struct quickjs_runtime::facades::QuickjsRuntimeFacadeInner\">QuickjsRuntimeFacadeInner</a>","synthetic":false,"types":["quickjs_runtime::facades::QuickjsRuntimeFacadeInner"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

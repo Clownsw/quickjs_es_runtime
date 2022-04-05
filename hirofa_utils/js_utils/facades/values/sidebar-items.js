@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["JsValueFacade","The JsValueFacade is a Send-able representation of a value in the Script engine"],["TypedArrayType",""]],"struct":[["CachedJsArrayRef",""],["CachedJsFunctionRef",""],["CachedJsObjectRef",""],["CachedJsPromiseRef",""]],"trait":[["JsValueConvertable",""]]});
