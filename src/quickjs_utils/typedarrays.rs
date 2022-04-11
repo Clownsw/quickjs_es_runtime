@@ -91,7 +91,7 @@ pub unsafe fn new_array_buffer(
     let raw = q::JS_NewArrayBuffer(
         ctx,
         buffer_ptr,
-        length,
+        length as u32,
         Some(free_func),
         opaque as _,
         is_shared as _,
@@ -153,7 +153,7 @@ pub unsafe fn new_array_buffer_copy(
     ctx: *mut q::JSContext,
     buf: &[u8],
 ) -> Result<JSValueRef, JsError> {
-    let length = buf.len() as u64;
+    let length = buf.len() as u32;
     let raw = q::JS_NewArrayBufferCopy(ctx, buf.as_ptr(), length);
     let obj_ref = JSValueRef::new(
         ctx,
@@ -200,7 +200,7 @@ pub unsafe fn detach_array_buffer_buffer(
             buffers.remove(&id)
         })
     } else {
-        let mut len: u64 = 0;
+        let mut len: u32 = 0;
         let ptr = q::JS_GetArrayBuffer(ctx, &mut len, *array_buffer.borrow_value());
 
         Vec::from_raw_parts(ptr, len as usize, len as usize)
@@ -232,7 +232,7 @@ pub unsafe fn get_array_buffer_buffer_copy(
 ) -> Result<Vec<u8>, JsError> {
     debug_assert!(is_array_buffer(ctx, array_buffer));
 
-    let mut len: u64 = 0;
+    let mut len: u32 = 0;
     let ptr = q::JS_GetArrayBuffer(ctx, &mut len, *array_buffer.borrow_value());
 
     let slice = std::slice::from_raw_parts(ptr, len as usize);
